@@ -22,8 +22,10 @@
         <th>ID Hewan</th>
         <th>Nama</th>
         <th>Usia</th>
+        <th>Jenis Hewan</th>
         <th>Jenis Kelamin</th>
         <th>Berat Badan</th>
+        <th>Hasil Kawin</th>
       </tr>
 		</thead>
 		<tbody v-for="profilhewan in profilhewan" :key="profilhewan.id">
@@ -31,8 +33,10 @@
 				<td data-label="ID Hewan">{{profilhewan.id}}</td>
 				<td data-label="Nama">{{profilhewan.nama}}</td>
         <td data-label="Usia">{{profilhewan.umur}}</td>
+        <td data-label="Jenis Hewan">{{profilhewan.jenishewan}}</td>
         <td data-label="Jenis Kelamin">{{profilhewan.jeniskelamin}}</td>
         <td data-label="Berat Badan">{{profilhewan.beratbadan}}</td>
+        <td data-label="Hasil Kawin">{{profilhewan.hasilkawin}}</td>
 			</tr>
     </tbody>
 		<!-- <tbody>

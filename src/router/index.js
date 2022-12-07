@@ -9,7 +9,7 @@ const routes = [
     component: () => import('../views/HomeView.vue')  
   },
   {
-    path: '/login',
+    path: '/',
     name: 'login',
     component: () => import('../views/LoginView.vue')
   },
@@ -52,12 +52,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login' && auth.currentUser) {
-    next('/')
+  if (to.path === '/' && auth.currentUser) {
+    next('/home')
     return;
   }
   if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
-    next('/login')
+    next('/')
     return;
   }
   next();
