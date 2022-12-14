@@ -4,67 +4,64 @@
 </div>
 <div class="header">
 	<br><br>
-	<h1>Sistem Informasi Ternak Hewan</h1>
+	<h1>Sistem Informasi Ternak Kambing dan Sapi</h1>
 </div>
 <div class="dasboard">
-  <img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
-  <img alt="list icon" src="../assets/white/list-icon.svg"><a href="daftar-ternak">Daftar Hewan Ternak</a><hr />
-  <img alt="add icon" src="../assets/white/add-icon.svg"><a href="hewan-baru">Hewan Ternak Baru</a><hr />
-  <img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi Ternak</a><hr />
+	<img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
+		<img alt="cow icon" src="../assets/white/cow-icon-white.svg"><a href="daftar-ternak">Daftar Hewan</a><hr />
+		<img alt="trophy icon" src="../assets/white/trophy-svgrepo-com.svg"><a href="prestasi">Daftar Prestasi</a><hr />
+		<img alt="calendar icon" src="../assets/white/calendar-icon.svg"><a href="tanggal">Tanggal Penting</a><hr />
+		<img alt="medicine icon" src="../assets/white/medicine-icon.svg"><a href="pengobatan">Riwayat Pengobatan</a><hr />
+		<img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi</a><hr />
+		<img alt="setting icon" src="../assets/white/settings-gear-svgrepo-com.svg"><a href="setting">Pengaturan</a><hr />
 </div>
 <div class="menu">
   <img alt="trophy svgrepo com" src="../assets/black/trophy-svgrepo-com.svg">
-  <span>Riwayat Prestasi Ternak</span>
+  <span>Daftar Prestasi</span>
 </div>
 <table class="table">
     <thead>
       <tr>
-        <th>No</th>
-        <th>Tanggal</th>
         <th>ID Hewan</th>
-        <th>Total Penghargaan</th>
         <th>Nama Perlombaan</th>
+		<th>Tanggal</th>
       </tr>
 	</thead>
-	<tbody>
+	<tbody v-for="prestasihewan in prestasihewan" :key="prestasihewan.id">
 		<tr>
-        <hr />
-        <td data-label="No">1</td>
-        <td data-label="Tanggal">01/01/2022</td>
-        <td data-label="ID Hewan">S-001</td>
-        <td data-label="Total Penghargaan">2</td>
-        <td data-label="Nama Perlombaan"><li>Sapi Merah</li><li>Adu Sapi Bos</li></td>
-			</tr>
-			<tr>
-        <td data-label="No">2</td>
-        <td data-label="Tanggal">10/11/2020</td>
-        <td data-label="ID Hewan">S-002</td>
-        <td data-label="Total Penghargaan">2</td>
-        <td data-label="Nama Perlombaan"><li>Adu Sapi 2020</li><li>Cow Fair 2020</li></td>
-			</tr>
-   
-      <tr>
-        <td data-label="No">3</td>
-        <td data-label="Tanggal">21/10/19</td>
-        <td data-label="ID Hewan">B-001</td>
-        <td data-label="Total Penghargaan">2</td>
-        <td data-label="Nama Perlombaan"><li>Duck Fair 2019</li><li>Adu Bebek</li></td>
-      </tr>
-
-      <tr>
-        <td data-label="No">4</td>
-        <td data-label="Tanggal">25/09/2018</td>
-        <td data-label="ID Hewan">K-003</td>
-        <td data-label="Total Penghargaan">1</td>
-        <td data-label="Nama Perlombaan"><li>Festival Kambing 2018</li></td>
-      </tr>
+			<td data-label="ID Hewan">{{prestasihewan.id}}</td>
+			<td data-label="Nama Perlombaan">{{prestasihewan.namalomba}}</td>
+			<td data-label="Tanggal">{{prestasihewan.tanggal}}</td>
+		</tr>
     </tbody>
+    <button class="button" ><a href="prestasi-baru">Tambah Prestasi</a></button>
   </table>
 </template>
 
 <script>
-export default {
+import { collection, getDocs } from "firebase/firestore/lite";
+import db from "../firebase";
 
+
+export default {
+  data() {
+    return {
+      prestasihewan: [],
+    };
+  },
+  mounted() {
+    this.getprestasihewan();
+  },
+  methods: {
+    getprestasihewan() {
+      getDocs(collection(db, "prestasihewan")).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.prestasihewan.push({ id: doc.id, ...doc.data() });
+        });
+      });
+      console.log(this.todos);
+    },
+  }
 }
 </script>
 
@@ -72,6 +69,11 @@ export default {
 body{
 	margin: 0px;
 	font-family: sans-serif;
+}
+
+a{
+	color: rgba(32,78,147,255);
+	font-size:large;
 }
 
 .welcome{

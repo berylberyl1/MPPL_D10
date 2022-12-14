@@ -4,17 +4,20 @@
 	</div>
 	<div class="header">
 		<br><br>
-		<h1>Sistem Informasi Ternak Hewan</h1>
+    <h1>Sistem Informasi Ternak Kambing dan Sapi</h1>
 	</div>
   <div class="dasboard">
     <img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
-    <img alt="list icon" src="../assets/white/list-icon.svg"><a href="daftar-ternak">Daftar Hewan Ternak</a><hr />
-    <img alt="add icon" src="../assets/white/add-icon.svg"><a href="hewan-baru">Hewan Ternak Baru</a><hr />
-    <img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi Ternak</a><hr />
+		<img alt="cow icon" src="../assets/white/cow-icon-white.svg"><a href="daftar-ternak">Daftar Hewan</a><hr />
+		<img alt="trophy icon" src="../assets/white/trophy-svgrepo-com.svg"><a href="prestasi">Daftar Prestasi</a><hr />
+		<img alt="calendar icon" src="../assets/white/calendar-icon.svg"><a href="tanggal">Tanggal Penting</a><hr />
+		<img alt="medicine icon" src="../assets/white/medicine-icon.svg"><a href="pengobatan">Riwayat Pengobatan</a><hr />
+		<img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi</a><hr />
+    <img alt="setting icon" src="../assets/white/settings-gear-svgrepo-com.svg"><a href="setting">Pengaturan</a><hr />
 	</div>
   <div class="menu">
     <img alt="cow icon" src="../assets/black/cow-icon.svg">
-    <span>Daftar Hewan Ternak</span>
+    <span>Daftar Hewan</span>
   </div>
   <table class="table">
     <thead>
@@ -39,38 +42,7 @@
         <td data-label="Hasil Kawin">{{profilhewan.hasilkawin}}</td>
 			</tr>
     </tbody>
-		<!-- <tbody>
-			<tr>
-				<td data-label="ID Hewan">S-01</td>
-				<td data-label="Nama">Paul</td>
-        <td data-label="Usia">10 tahun</td>
-        <td data-label="Jenis Kelamin">Jantan</td>
-        <td data-label="Berat Badan">1000 kg</td>
-			</tr>
-			<tr>
-				<td data-label="ID Hewan">S-02</td>
-				<td data-label="Nama">Jenny</td>
-        <td data-label="Usia">12 tahun</td>
-        <td data-label="Jenis Kelamin">Betina</td>
-        <td data-label="Berat Badan">800 kg</td>
-			</tr>
-   
-      <tr>
-        <td data-label="ID Hewan">K-01</td>
-				<td data-label="Nama">Shaun</td>
-        <td data-label="Usia">4 tahun</td>
-        <td data-label="Jenis Kelamin">Jantan</td>
-        <td data-label="Berat Badan">50 kg</td>
-        </tr>
-   
-      <tr>
-        <td data-label="ID Hewan">K-02</td>
-        <td data-label="Nama">Trixie</td>
-        <td data-label="Usia">10 tahun</td>
-        <td data-label="Jenis Kelamin">Betina</td>
-        <td data-label="Berat Badan">120 kg</td>
-      </tr>
-    </tbody> -->
+    <button class="button" ><a href="hewan-baru">Tambah Hewan Ternak</a></button>
   </table>
 </template>
 
@@ -87,10 +59,10 @@ export default {
     };
   },
   mounted() {
-    this.getprofilhewan2();
+    this.getprofilhewan();
   },
   methods: {
-    getprofilhewan2() {
+    getprofilhewan() {
       getDocs(collection(db, "profilhewan")).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           this.profilhewan.push({ id: doc.id, ...doc.data() });
@@ -122,7 +94,7 @@ body{
 }
 
 a{
-	color: rgb(255, 255, 255);
+	color: rgba(32,78,147,255);
 	font-size:large;
 }
 

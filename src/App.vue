@@ -10,9 +10,9 @@
     <router-link to="/tanggal">Tanggal</router-link> |
     <router-link to="/transaksi">Transaksi</router-link> |
   </nav> -->
-  <div id="nav" v-if="$store.state.user">
+  <!-- <div id="nav" v-if="$store.state.user">
     <button @click="$store.dispatch('logout')">Logout</button>
-  </div>
+  </div> -->
   <router-view/>
 </template>
 

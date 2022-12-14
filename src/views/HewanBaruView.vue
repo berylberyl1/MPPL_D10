@@ -4,13 +4,16 @@
 </div>
 <div class="header">
   <br><br>
-  <h1>Sistem Informasi Ternak Hewan</h1>
+  <h1>Sistem Informasi Ternak Kambing dan Sapi</h1>
 </div>
 <div class="dasboard">
   <img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
-  <img alt="list icon" src="../assets/white/list-icon.svg"><a href="daftar-ternak">Daftar Hewan Ternak</a><hr />
-  <img alt="add icon" src="../assets/white/add-icon.svg"><a href="hewan-baru">Hewan Ternak Baru</a><hr />
-  <img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi Ternak</a><hr />
+		<img alt="cow icon" src="../assets/white/cow-icon-white.svg"><a href="daftar-ternak">Daftar Hewan</a><hr />
+		<img alt="trophy icon" src="../assets/white/trophy-svgrepo-com.svg"><a href="prestasi">Daftar Prestasi</a><hr />
+		<img alt="calendar icon" src="../assets/white/calendar-icon.svg"><a href="tanggal">Tanggal Penting</a><hr />
+		<img alt="medicine icon" src="../assets/white/medicine-icon.svg"><a href="pengobatan">Riwayat Pengobatan</a><hr />
+		<img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi</a><hr />
+    <img alt="setting icon" src="../assets/white/settings-gear-svgrepo-com.svg"><a href="setting">Pengaturan</a><hr />
 </div>
 <div class="menu">
   <img alt="cow icon" src="../assets/black/cow-icon.svg">
@@ -56,7 +59,7 @@
 
     <div class="wrapper">
       <label for="submit" class="labelfrm" ></label>
-      <input type="submit" name="Submit" value="Submit"  onclick="window.location.href = 'home';"/>
+      <input type="submit" name="Submit" value="Submit"  onclick="window.location.href = 'daftar-ternak';"/>
     </div>
   </form>
 </div>
@@ -68,7 +71,7 @@
 import { setDoc, doc, collection, /*query, where, getCountFromServer, updateDoc*/ } from "firebase/firestore/lite";
 import db from "../firebase";
 
-import $ from 'jquery'
+// import $ from 'jquery'
 
 export default {
   data() {
@@ -86,57 +89,57 @@ export default {
     };
   },
   mounted () {
-    this.getCount();
-    $(document).ready(function(){
-        $('#frm-hwn').validate({
-            rules: {
-                jenis : {
-                    required: true
-                },
-                id : {
-                    required: true
-                },
-                nama: {
-                    required: true,
-                },
-                gender: {
-                    required: true
-                },
-                umur: {
-                    required: true,
-                    digits: true,
-                    range: [0, 100]
-                },
-                berat: {
-                    required: true,
-                    digits: true
-                }
-            },
-            messages: {
-                jenis: {
-                    required: " Jenis hewan harus diisi",
-                },
-                id: {
-                    required: " ID hewan harus diisi"
-                },
-                nama: {
-                    required: " Nama hewan harus diisi",
-                },
-                gender: {
-                    required: " Gender hewan harus diisi"
-                },
-                umur: {
-                    required: " Umur hewan harus diisi",
-                    digits: " Umur hewan harus hanya terdiri dari angka",
-                    range: " Umur hewan harus ada di antara 0-100"
-                },
-                berat: {
-                    required: " Berat hewan harus diisi",
-                    digits: " Berat hewan harus hanya terdiri dari angka"
-                }
-            }
-        });
-    });
+    // this.getCount();
+    // $(document).ready(function(){
+    //     $('#frm-hwn').validate({
+    //         rules: {
+    //             jenis : {
+    //                 required: true
+    //             },
+    //             id : {
+    //                 required: true
+    //             },
+    //             nama: {
+    //                 required: true,
+    //             },
+    //             gender: {
+    //                 required: true
+    //             },
+    //             umur: {
+    //                 required: true,
+    //                 digits: true,
+    //                 range: [0, 100]
+    //             },
+    //             berat: {
+    //                 required: true,
+    //                 digits: true
+    //             }
+    //         },
+    //         messages: {
+    //             jenis: {
+    //                 required: " Jenis hewan harus diisi",
+    //             },
+    //             id: {
+    //                 required: " ID hewan harus diisi"
+    //             },
+    //             nama: {
+    //                 required: " Nama hewan harus diisi",
+    //             },
+    //             gender: {
+    //                 required: " Gender hewan harus diisi"
+    //             },
+    //             umur: {
+    //                 required: " Umur hewan harus diisi",
+    //                 digits: " Umur hewan harus hanya terdiri dari angka",
+    //                 range: " Umur hewan harus ada di antara 0-100"
+    //             },
+    //             berat: {
+    //                 required: " Berat hewan harus diisi",
+    //                 digits: " Berat hewan harus hanya terdiri dari angka"
+    //             }
+    //         }
+    //     });
+    // });
   },
   methods: {
     addprofilhewan() {

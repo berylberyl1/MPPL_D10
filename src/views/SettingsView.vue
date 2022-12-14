@@ -1,41 +1,27 @@
 <template>
-<div class="welcome">
-	<h2>Selamat datang, ADMIN</h2>
-</div>
-<div class="header">
-<br><br>
-<h1>Sistem Informasi Ternak Kambing dan Sapi</h1>
-</div>
-<div class="dasboard">
-	<img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
+  <div class="welcome">
+		<h2>Selamat datang, ADMIN</h2>
+	</div>
+	<div class="header">
+		<br><br>
+    <h1>Sistem Informasi Ternak Kambing dan Sapi</h1>
+	</div>
+  <div class="dasboard">
+    <img alt="dashboard icon" src="../assets/white/dashboard-icon.svg"><a href="home">Dashboard</a><hr />
 		<img alt="cow icon" src="../assets/white/cow-icon-white.svg"><a href="daftar-ternak">Daftar Hewan</a><hr />
 		<img alt="trophy icon" src="../assets/white/trophy-svgrepo-com.svg"><a href="prestasi">Daftar Prestasi</a><hr />
 		<img alt="calendar icon" src="../assets/white/calendar-icon.svg"><a href="tanggal">Tanggal Penting</a><hr />
 		<img alt="medicine icon" src="../assets/white/medicine-icon.svg"><a href="pengobatan">Riwayat Pengobatan</a><hr />
 		<img alt="history icon" src="../assets/white/history-icon.svg"><a href="transaksi">Riwayat Transaksi</a><hr />
-		<img alt="setting icon" src="../assets/white/settings-gear-svgrepo-com.svg"><a href="setting">Pengaturan</a><hr />
-</div>
-<div class="menu">
-  <img alt="medicine icon" src="../assets/black/medicine-icon.svg">
-  <span>Riwayat Pengobatan Ternak</span>
-</div>
-<table class="table">
-    <thead>
-      <tr>
-        <th>ID Hewan</th>
-        <th>Jenis Pengobatan</th>
-		<th>Tanggal</th>
-      </tr>
-	</thead>
-	<tbody v-for="pengobatanhewan in pengobatanhewan" :key="pengobatanhewan.id">
-		<tr>
-			<td data-label="ID Hewan">{{pengobatanhewan.id}}</td>
-			<td data-label="Jenis Pengobatan">{{pengobatanhewan.jenispengobatan}}</td>
-			<td data-label="Tanggal">{{pengobatanhewan.tanggal}}</td>
-		</tr>
-    </tbody>
-    <button class="button" ><a href="pengobatan-baru">Tambah Riwayat Pengobatan</a></button>
-  </table>
+    <img alt="setting icon" src="../assets/white/settings-gear-svgrepo-com.svg"><a href="setting">Pengaturan</a><hr />
+	</div>
+  <div class="menu">
+    <img alt="setting icon" src="../assets/black/settings-gear-svgrepo-com.svg">
+    <span>Settings</span>
+  </div>
+  <div id="nav" v-if="$store.state.user">
+    <button @click="$store.dispatch('logout')">Logout</button>
+  </div>
 </template>
 
 
@@ -47,17 +33,17 @@ import db from "../firebase";
 export default {
   data() {
     return {
-      pengobatanhewan: [],
+      profilhewan: [],
     };
   },
   mounted() {
-    this.getpengobatanhewan();
+    this.getprofilhewan2();
   },
   methods: {
-    getpengobatanhewan() {
-      getDocs(collection(db, "pengobatanhewan")).then((querySnapshot) => {
+    getprofilhewan2() {
+      getDocs(collection(db, "profilhewan")).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          this.pengobatanhewan.push({ id: doc.id, ...doc.data() });
+          this.profilhewan.push({ id: doc.id, ...doc.data() });
         });
       });
       console.log(this.todos);
@@ -72,9 +58,8 @@ body{
 	font-family: sans-serif;
 }
 
-
 .header{
-	background-color: rgb(50, 50, 214);
+	background-color: rgba(32,78,147,255);
 }
 
 .dasboard{
@@ -82,8 +67,8 @@ body{
 		left: 0px;
 		width: 250px;
 		height: 1000px;
-		border: 50px solid rgb(50, 50, 214);
-		background-color: rgb(50, 50, 214);
+		border: 50px solid rgba(32,78,147,255);
+		background-color: rgba(32,78,147,255);
 }
 
 a{
@@ -135,10 +120,10 @@ h2{
 }
 
 .menu {
-  border-bottom: 5px solid black;
-  margin-left: 400px;
-  display: flex;
- align-items:center;
+	border-bottom: 5px solid black;
+	margin-left: 400px;
+	display: flex;
+  align-items:center;
 }
 
 .menu img{
@@ -148,47 +133,47 @@ h2{
 }
 
 .menu span{
-	margin-left: 10px;
-	font-family: 'comic sans ms';
-	font-size: 30px;
+  margin-left: 10px;
+  font-family: 'comic sans ms';
+  font-size: 30px;
   align-items:center;
-	line-height: 0px;
+  line-height: 0px;
 }
 
 .dasboard{
-	position: absolute;
-	left: 0px;
-	width: 400px;
-	height: 600px;
-	border: 5px solid black;
-	background-color: rgba(32,78,147,255);
-	display: inline;
+  position: absolute;
+  left: 0px;
+  width: 400px;
+  height: 600px;
+  border: 5px solid black;
+  background-color: rgba(32,78,147,255);
+  display: inline;
 }
 
 .dasboard img{
-	float: left;
-	margin-right: 10px;
-	margin-left: 10px;
-	margin-top: 10px;
-	fill:rgb(255, 255, 255);
+  float: left;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  fill:rgb(255, 255, 255);
 }
 
 .dasboard a{
-	font-family: 'comic sans ms';
-	color: rgb(255, 255, 255);
-	font-size:x-large;
-	display: flex;
+  font-family: 'comic sans ms';
+  color: rgb(255, 255, 255);
+  font-size:x-large;
+  display: flex;
   align-items:center;
-	line-height: 50px;
-	text-decoration: none;
-	margin-top: 10px;
+  line-height: 50px;
+  text-decoration: none;
+  margin-top: 10px;
 }
 
 .table{
-	width: 72%;
-	border-collapse: collapse;
-	float: right;
-	margin-right: 10px;
+  width: 72%;
+  border-collapse: collapse;
+  float: right;
+  margin-right: 10px;
 }
 
 .table td,.table th{
@@ -199,35 +184,32 @@ h2{
 }
 
 .table th{
-	background-color: rgba(32,78,147,255);
-	color:#ffffff;
+  background-color: rgba(32,78,147,255);
+  color:#ffffff;
 }
 
 .table tbody tr:nth-child(even){
-	background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
-/*responsive*/
-
 @media(max-width: 500px){
-	.table thead{
-		display: none;
-	}
-
-	.table, .table tbody, .table tr, .table td{
-		display: block;
-		width: 100%;
-	}
-	.table tr{
+  .table thead{
+    display: none;
+  }
+  .table, .table tbody, .table tr, .table td{
+    display: block;
+    width: 100%;
+  }
+  .table tr{
     margin-bottom:15px;
   }
-	.table td{
+  .table td{
     text-align: right;
     padding-left: 50%;
     text-align: right;
     position: relative;
   }
-	.table td::before{
+  .table td::before{
     content: attr(data-label);
     position: absolute;
     left:0;
